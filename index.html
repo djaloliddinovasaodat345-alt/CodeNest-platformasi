@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodeNest💻 Platform</title>
+    <link rel="stylesheet" href="mean.css">
+</head>
+
+<body>
+
+  <div class="container">
+        <div id="loginScreen" class="login-screen">
+            <div class="login-box">
+                <h1>CodeNest💻 Platformasi</h1>
+                <div class="user-select" id="userSelect">
+                    <button class="user-btn leader" onclick="showPasswordPrompt()">
+                        <div class="user-avatar">S</div>
+                        <div class="user-info">
+                            <h3>Mirzohid</h3>
+                            <p>Team Lead</p>
+                        </div>
+                    </button>
+                    <button class="user-btn" onclick="login('member1')">
+                        <div class="user-avatar">A</div>
+                        <div class="user-info">
+                            <h3>Abdulfozil</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </button>
+                    <button class="user-btn" onclick="login('member2')">
+                        <div class="user-avatar">J</div>
+                        <div class="user-info">
+                            <h3>Dilnora</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </button>
+                    <button class="user-btn" onclick="login('member3')">
+                        <div class="user-avatar">M</div>
+                        <div class="user-info">
+                            <h3>Soadat</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </button>
+                </div>
+                <div class="password-prompt hidden" id="passwordPrompt">
+                    <h2>🔐 Parol Kiriting</h2>
+                    <div class="form-group">
+                        <input type="password" id="leaderPassword" placeholder="Parolni kiriting" maxlength="4">
+                        <p class="error-msg hidden" id="errorMsg">Parol noto'g'ri! Qayta urinib ko'ring.</p>
+                    </div>
+                    <button class="btn" onclick="checkPassword()">Kirish</button>
+                    <button class="btn btn-secondary" onclick="cancelPassword()">Bekor qilish</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderView" class="hidden">
+            <div class="header">
+                <div class="header-left">
+                    <h1>🚀 Team Lead Panel</h1>
+                    <p>Xush kelibsiz, Sardor!</p>
+                </div>
+                <button class="logout-btn" onclick="logout()">Chiqish</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalTasks">0</h3>
+                    <p>Jami vazifalar</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="pendingTasks">0</h3>
+                    <p>Kutilmoqda</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="inProgressTasks">0</h3>
+                    <p>Jarayonda</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="completedTasks">0</h3>
+                    <p>Bajarilgan</p>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="task-form">
+                    <h2>📋 Yangi Vazifa Qo'shish</h2>
+                    <form id="taskForm">
+                        <div class="form-group">
+                            <label>Vazifa nomi</label>
+                            <input type="text" id="taskTitle" placeholder="Vazifa nomini kiriting" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tavsif</label>
+                            <textarea id="taskDesc" placeholder="Vazifa tafsilotlari" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ijrochi</label>
+                            <select id="taskAssignee" required>
+                                <option value="">Tanlang</option>
+                                <option value="member1">Aziz - Frontend Developer</option>
+                                <option value="member2">Jasur - Backend Developer</option>
+                                <option value="member3">Madina - UI/UX Designer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Muhimlik darajasi</label>
+                            <select id="taskPriority" required>
+                                <option value="high">Yuqori</option>
+                                <option value="medium">O'rta</option>
+                                <option value="low">Past</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Vazifa Qo'shish</button>
+                    </form>
+                </div>
+
+                <div class="team-board">
+                    <h2>👥 Jamoa A'zolari</h2>
+                    <div class="team-members">
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">A</div>
+                                <div class="member-info">
+                                    <h3>Aziz</h3>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                            <div class="task-list" id="leaderMember1Tasks">
+                                <div class="empty-state">Vazifalar yo'q</div>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">J</div>
+                                <div class="member-info">
+                                    <h3>Jasur</h3>
+                                    <p>Backend Developer</p>
+                                </div>
+                            </div>
+                            <div class="task-list" id="leaderMember2Tasks">
+                                <div class="empty-state">Vazifalar yo'q</div>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="avatar">M</div>
+                                <div class="member-info">
+                                    <h3>Madina</h3>
+                                    <p>UI/UX Designer</p>
+                                </div>
+                            </div>
+                            <div class="task-list" id="leaderMember3Tasks">
+                                <div class="empty-state">Vazifalar yo'q</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="memberView" class="hidden member-view">
+            <div class="header">
+                <div class="header-left">
+                    <h1>📝 Mening Vazifalarim</h1>
+                    <p id="memberName"></p>
+                </div>
+                <button class="logout-btn" onclick="logout()">Chiqish</button>
+            </div>
+
+            <div class="my-tasks-card">
+                <h2>Sizning vazifalaringiz</h2>
+                <div class="task-list" id="myTasks">
+                    <div class="empty-state">Hozircha vazifalar yo'q</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="mean.js"></script>
+</body>
+
+</html>
